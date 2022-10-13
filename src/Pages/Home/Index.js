@@ -1,23 +1,39 @@
 import React from "react";
-import "rsuite/dist/rsuite-rtl.css";
 import { Carousel } from "rsuite";
-import image1 from "../../Pictures/Image1.png";
-import image2 from "../../Pictures/Image2.jpg";
-import image3 from "../../Pictures/Image3.jpg";
+import carouselImage1 from "../../Assets/carouselImage1.jpg";
+import carouselImage2 from "../../Assets/carouselImage2.jpg";
+import carouselImage3 from "../../Assets/carouselImage3.jpg";
+
+const images = [carouselImage1, carouselImage2, carouselImage3];
 
 export default function Home() {
   return (
     <>
-      <h1 class="font-medium leading-tight text-5xl mt-0 mb-2 text-black-600 grid place-items-center ">
-        Happy Voting!
-      </h1>
+      <div className="flex place-content-center">
+        <h1 className="font-medium leading-tight pb-2 text-2xl sm:text-5xl mt-0 mb-2 text-black ">
+          Happy <span className="text-orange-900">Voting</span>
+        </h1>
+
+        <img
+          src="https://media.tenor.com/hI-oOVvwasYAAAAC/happy.gif"
+          alt=""
+          height={50}
+          width={50}
+        />
+
+        <h1 className="font-medium leading-tight pb-2 text-2xl sm:text-5xl mt-0 mb-2 text-black-600 ">
+          !
+        </h1>
+      </div>
+
       <Carousel
-        autoplay
-        className="object-cover rounded lg custom-slider w-full sm:max-h-full max- h-48"
+        className="object-cover rounded-lg custom-slider w-full sm:max-h-full max-h-48"
+        shape="bar"
+        autoplay={true}
       >
-        <img src={image1} alt="" />
-        <img src={image2} alt="" />
-        <img src={image3} alt="" />
+        {images.map((image, index) => {
+          return <img src={image} alt="" key={index} />;
+        })}
       </Carousel>
     </>
   );

@@ -4,7 +4,7 @@ import Home from "./Pages/Home/Index";
 import Login from "./Pages/Login/Index";
 import Voting from "./Pages/Voting/Index";
 import { useEffect, useState } from "react";
-import image5 from "./Pictures/Logo.png";
+import logo from "./Assets/Logo.png";
 import contestants from "./contestants";
 import Card from "./Pages/Voting/card";
 
@@ -19,8 +19,6 @@ function App() {
   const location = useLocation();
   const [path, setpath] = useState(location.pathname);
 
-  console.log(contestantObj)
-  
 // spliting of the Url to get the username
   let temp = path.split("/");
   let userName = temp[temp.length - 1];
@@ -43,7 +41,7 @@ function App() {
           <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
             <div className="container flex flex-wrap justify-between items-center mx-auto">
               <Link to="/Home" className="flex items-center">
-                <img src={image5} className="mr-3 h-6 sm:h-9" alt="" />
+                <img src={logo} className="mr-3 h-6 sm:h-9" alt="" />
                 <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
                   Kenyatta University Autonomous Voting System
                 </span>
