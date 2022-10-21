@@ -1,0 +1,27 @@
+const mongoose = require("mongoose");
+
+const userSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  passwordHash: {
+    type: String,
+    required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+userSchema.virtual("id").get(function () {
+  return this._id.toHexString();
+});
+
+userSchema.set("toJSON", {
+  virtuals: true,
+});
+
+// creating the model
+exports.User = mongoose.model("User", userSchema, "user");
