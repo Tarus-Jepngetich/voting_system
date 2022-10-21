@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import Home from "./Pages/Home/Index";
-import Login from "./Pages/Login/Index";
+import Aboutus from "./Pages/aboutus";
 import Voting from "./Pages/Voting/Index";
 import { useEffect, useState } from "react";
 import image5 from "./Pictures/Logo.png";
@@ -36,16 +36,18 @@ function App() {
 
   return (
     <>
-      {path === "/Login" ? (
+      {path === "/Register" ? (
         <>
-          <Login />
+          <Register />
         </>
       ) : path === "/" ? (
         <>
           <LandingPage />
         </>
-      ) : path === "/Register" ? (
-        <Register />
+      ) : path === "/aboutus" ? (
+        <>
+          <Aboutus />
+        </>
       ) : (
         <>
           <Navbar image5={image5}>
