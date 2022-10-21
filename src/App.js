@@ -9,6 +9,7 @@ import contestants from "./contestants";
 import Card from "./Pages/Voting/card";
 import Navbar from "./components/Layout/navbar";
 import LandingPage from ".//Pages/LandingPage";
+import Register from "./Pages/Register/Index";
 
 const contestantObj = contestants.reduce((accumulator, currentValue) => {
   // destructring the current value
@@ -43,6 +44,8 @@ function App() {
         <>
           <LandingPage />
         </>
+      ) : path === "/Register" ? (
+        <Register />
       ) : (
         <>
           <Navbar image5={image5}>
