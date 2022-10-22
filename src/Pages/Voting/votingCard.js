@@ -6,12 +6,12 @@ export default function VotingCard({ img, name, description }) {
 
   return (
     <>
-      <div
-        className="flex flex-row place-content-center py-6"
-        onClick={() => navigate(`/Voting/${name}`)}
-      >
-        <div className="h-96 max-h-full w-96 max-w-full rounded overflow-hidden shadow-lg">
-          <img className="w-full" src={img} alt="Sunset in the mountains" />
+      <div className="flex flex-row place-content-center py-6">
+        <div
+          className="h-96 max-h-full w-96 max-w-full rounded overflow-hidden shadow-lg"
+          onClick={() => navigate(`/Voting/${name}`)}
+        >
+          <img className="w-full h-64" src={img} alt="Sunset in the mountains" />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{name}</div>
             <p className="text-gray-700 text-base">{description}</p>

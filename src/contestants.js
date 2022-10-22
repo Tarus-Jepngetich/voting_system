@@ -1,4 +1,4 @@
-import img from './Pictures/Image1.png'
+import img from './Pictures/kamala.jpg'
 const contestants = [
   {
     name: "russell",
