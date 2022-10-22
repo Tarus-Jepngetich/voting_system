@@ -11,6 +11,7 @@ const app = express();
 // these will be our dot env imports
 const PORT = process.env.PORT;
 const CONNECTION_STRING = process.env.CONNECTION_STRING;
+const DB_NAME = process.env.DB_NAME;
 
 // middlewares
 app.use(cors());
@@ -19,7 +20,13 @@ app.use(express.json());
 app.use(morgan("tiny"));
 
 // connecting our api to our server using mongoose
-mongoose.connect(CONNECTION_STRING)
+mongoose
+  .connect(CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    dbName: DB_NAME,
+  })
   .then(() => {
     console.log("Database connection is ready...");
   })
