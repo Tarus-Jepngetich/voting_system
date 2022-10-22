@@ -4,12 +4,12 @@ export default function Navbar({ children, image5 }) {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   return (
     <>
-      <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
-        <div className="container flex flex-wrap justify-between items-center mx-auto">
+      <nav className="bg-gray-200 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+        <div className="container flex justify-between items-center mx-auto">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <a href="/home" className="flex items-center">
               <img src={image5} className="mr-3 h-6 sm:h-9" alt="" />
-              <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+              <span className="self-center text-sm sm:text-xl font-semibold whitespace-nowrap dark:text-white">
                 Kenyatta University Autonomous Voting System
               </span>
             </a>

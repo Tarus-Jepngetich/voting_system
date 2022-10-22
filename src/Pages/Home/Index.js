@@ -1,4 +1,5 @@
 import React from "react";
+// import "rsuite/dist/rsuite.css";
 import { Carousel } from "rsuite";
 import image1 from "../../Pictures/Image1.png";
 import image2 from "../../Pictures/Image2.jpg";
