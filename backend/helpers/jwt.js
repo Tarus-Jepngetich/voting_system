@@ -1,7 +1,7 @@
 const { expressjwt } = require("express-jwt");
 require("dotenv/config");
 
-function authJwt(req, res) {
+function authJwt() {
   const secret = process.env.secret;
 
   return expressjwt({
@@ -16,13 +16,11 @@ function authJwt(req, res) {
       { url: /\/public\/uploads(.*)/, methods: ["GET", "OPTIONS"] },
       { url: /\/contestant(.*)/, methods: ["PUT", "GET", "POST", "OPTIONS"] },
       { url: /\/school(.*)/, methods: ["GET", "OPTIONS"] },
-      // { url: /\/student${:id}/, methods: ["GET", "OPTIONS"] },
-      { url: /^\/student\/.*id/, methods: ["GET", "OPTIONS"] },
+      { url: /^\/student\/(.*)/, methods: ["GET", "POST", "PUT", "OPTIONS"] },
+      { url: /^\/user\/(.*)/, methods: ["GET", "POST", "PUT", "OPTIONS"] },
 
-      `/user/register`,
-      `/user/login`,
-
-      // `/student/${req.params.id}`
+      // `/user/register`,
+      // `/user/login`,
     ],
   });
 }
