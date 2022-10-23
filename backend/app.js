@@ -1,9 +1,19 @@
-// imports
+// node module imports
 const express = require("express");
 const cors = require("cors");
 require("dotenv/config");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+
+// jwt imports
+const authJwt = require("./helpers/jwt");
+const errorHandler = require("./helpers/error-handler");
+
+// routes imports
+const studentRoutes = require("./routes/student");
+const userRoutes = require("./routes/user");
+const schoolRoutes = require("./routes/school");
+const contestantRoutes = require("./routes/contestant");
 
 // create an instance of express in a variable named app
 const app = express();
@@ -18,13 +28,16 @@ app.use(cors());
 app.options("*", cors());
 app.use(express.json());
 app.use(morgan("tiny"));
+app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
+app.use(authJwt());
+app.use(errorHandler);
+
 
 // connecting our api to our server using mongoose
 mongoose
   .connect(CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
     dbName: DB_NAME,
   })
   .then(() => {
@@ -39,3 +52,10 @@ mongoose
 app.listen(PORT, () => {
   console.log(`server is running on http://localhost:${PORT}`);
 });
+
+
+// Routes
+app.use('/student', studentRoutes)
+app.use('/user' , userRoutes)
+app.use('/school', schoolRoutes)
+app.use('/contestant', contestantRoutes)

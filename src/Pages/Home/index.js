@@ -1,5 +1,5 @@
 import React from "react";
-import phone from "../../Pictures/phone.png";
+import phone from "../../Assets/phone.png";
 
 export default function Home() {
   return (
@@ -17,28 +17,28 @@ export default function Home() {
       }}
       >
         
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 "
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 "
        
         >
           
-          <div class="lg:text-center">
-            <p class="mt-2 text-3xl font-bold leading-8 tracking-tight text-indigo-600 sm:text-4xl">
+          <div className="lg:text-center">
+            <p className="mt-2 text-3xl font-bold leading-8 tracking-tight text-indigo-600 sm:text-4xl">
               Welcome !
             </p>
-            <p class="mt-4 max-w-2xl text-xl text-gray-900 lg:mx-auto">
+            <p className="mt-4 max-w-2xl text-xl text-gray-900 lg:mx-auto">
               We are excited to have you using our system. We hope you will
               enjoy the voting experience we have to offer.
             </p>
           </div>
 
-          <div class="mt-10">
-            <dl class="space-y-10 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 md:space-y-0">
-              <div class="relative">
+          <div className="mt-10">
+            <dl className="space-y-10 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 md:space-y-0">
+              <div className="relative">
                 <dt>
-                  <div class="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
+                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
                     {/* <!-- Heroicon name: outline/globe-alt --> */}
                     <svg
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -53,23 +53,23 @@ export default function Home() {
                       />
                     </svg>
                   </div>
-                  <p class="ml-16 text-lg font-medium leading-6 text-gray-900">
+                  <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
                     Competitive exchange rates
                   </p>
                 </dt>
-                <dd class="mt-2 ml-16 text-base text-gray-500">
+                <dd className="mt-2 ml-16 text-base text-gray-500">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                   Maiores impedit perferendis suscipit eaque, iste dolor
                   cupiditate blanditiis ratione.
                 </dd>
               </div>
 
-              <div class="relative">
+              <div className="relative">
                 <dt>
-                  <div class="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
+                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
                     {/* <!-- Heroicon name: outline/scale --> */}
                     <svg
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -84,23 +84,23 @@ export default function Home() {
                       />
                     </svg>
                   </div>
-                  <p class="ml-16 text-lg font-medium leading-6 text-gray-900">
+                  <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
                     No hidden fees
                   </p>
                 </dt>
-                <dd class="mt-2 ml-16 text-base text-gray-500">
+                <dd className="mt-2 ml-16 text-base text-gray-500">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                   Maiores impedit perferendis suscipit eaque, iste dolor
                   cupiditate blanditiis ratione.
                 </dd>
               </div>
 
-              <div class="relative">
+              <div className="relative">
                 <dt>
-                  <div class="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
+                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
                     {/* <!-- Heroicon name: outline/bolt --> */}
                     <svg
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -115,23 +115,23 @@ export default function Home() {
                       />
                     </svg>
                   </div>
-                  <p class="ml-16 text-lg font-medium leading-6 text-gray-900">
+                  <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
                     Transfers are instant
                   </p>
                 </dt>
-                <dd class="mt-2 ml-16 text-base text-gray-500">
+                <dd className="mt-2 ml-16 text-base text-gray-500">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                   Maiores impedit perferendis suscipit eaque, iste dolor
                   cupiditate blanditiis ratione.
                 </dd>
               </div>
 
-              <div class="relative">
+              <div className="relative">
                 <dt>
-                  <div class="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
+                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
                     {/* <!-- Heroicon name: outline/chat-bubble-bottom-center-text --> */}
                     <svg
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -146,11 +146,11 @@ export default function Home() {
                       />
                     </svg>
                   </div>
-                  <p class="ml-16 text-lg font-medium leading-6 text-gray-900">
+                  <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
                     Mobile notifications
                   </p>
                 </dt>
-                <dd class="mt-2 ml-16 text-base text-gray-500">
+                <dd className="mt-2 ml-16 text-base text-gray-500">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                   Maiores impedit perferendis suscipit eaque, iste dolor
                   cupiditate blanditiis ratione.

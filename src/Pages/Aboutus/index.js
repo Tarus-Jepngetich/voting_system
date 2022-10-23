@@ -1,4 +1,4 @@
-import hands from "../../Pictures/hands2.png";
+import hands from "../../Assets/hands2.png";
 
 import { Element } from "react-scroll";
 import { useNavigate } from "react-router-dom";

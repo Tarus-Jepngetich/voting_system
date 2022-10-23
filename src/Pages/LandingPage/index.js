@@ -1,6 +1,6 @@
 import { useState } from "react";
 import LoginModal from "../LoginModal";
-import land from "../../Pictures/land.svg";
+import land from "../../Assets/land.svg";
 
 export default function LandingPage() {
   const [isToggled, setIsToggled] = useState(false);
@@ -18,7 +18,8 @@ export default function LandingPage() {
                 </h1>
                 <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                   This is an online software platform that allows groups to
-                  securely conduct votes and elections.  It offers the overall requirements of a voting event.
+                  securely conduct votes and elections. It offers the overall
+                  requirements of a voting event.
                 </p>
 
                 <button
@@ -51,7 +52,8 @@ export default function LandingPage() {
               </h1>
               <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                 This is an online software platform that allows groups to
-                securely conduct votes and elections. It offers the overall requirements of a voting event.
+                securely conduct votes and elections. It offers the overall
+                requirements of a voting event.
               </p>
 
               <button

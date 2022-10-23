@@ -1,10 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import inspo from "../../Pictures/Inspiration.gif";
-import logo from "../../Pictures/Logo.png";
+import inspo from "../../Assets/Inspiration.gif";
+import logo from "../../Assets/Logo.png";
 
 export default function Register() {
-  const navigate = useNavigate();
-
   return (
     <>
       <div className="grid grid-cols-1 h-screen w-full">
@@ -23,7 +20,7 @@ export default function Register() {
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                   Register
+                  Register
                 </h1>
                 <form className="space-y-4 md:space-y-6" action="#">
                   <div>
@@ -72,7 +69,7 @@ export default function Register() {
                       required=""
                     />
                   </div>
-                  
+
                   <button
                     type="submit"
                     className="w-full text-white bg-primary-600 bg-blue-400 hover:bg-cyan-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"

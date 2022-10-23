@@ -6,9 +6,8 @@ const studentSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
-  regNo: {
-    type: String,
-    requried: true,
+  hasVoted: {
+    type: Boolean,
   },
   school: {
     type: mongoose.Schema.Types.ObjectId,
