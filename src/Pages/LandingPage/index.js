@@ -17,8 +17,8 @@ export default function LandingPage() {
                   Voting system for Kenyatta University
                 </h1>
                 <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                  From checkout to global sales tax compliance, companies around
-                  the world use Flowbite to simplify their payment stack.
+                  This is an online software platform that allows groups to
+                  securely conduct votes and elections.  It offers the overall requirements of a voting event.
                 </p>
 
                 <button
@@ -37,10 +37,7 @@ export default function LandingPage() {
                 </a>
               </div>
               <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img
-                  src={land}
-                  alt=""
-                />
+                <img src={land} alt="" />
               </div>
             </div>
           </section>
@@ -53,8 +50,8 @@ export default function LandingPage() {
                 Voting system for Kenyatta University
               </h1>
               <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                From checkout to global sales tax compliance, companies around
-                the world use Flowbite to simplify their payment stack.
+                This is an online software platform that allows groups to
+                securely conduct votes and elections. It offers the overall requirements of a voting event.
               </p>
 
               <button
@@ -71,12 +68,9 @@ export default function LandingPage() {
               >
                 About us
               </a>
-            </div> 
+            </div>
             <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-              <img
-                src={land}
-                alt=""
-              />
+              <img src={land} alt="" />
             </div>
           </div>
         </section>
