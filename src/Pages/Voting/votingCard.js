@@ -14,7 +14,7 @@ export default function VotingCard({ img, name, description }) {
           <img
             className="w-full h-64"
             src={img}
-            alt="Sunset in the mountains"
+            alt=""
           />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{name}</div>

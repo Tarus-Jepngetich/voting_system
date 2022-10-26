@@ -39,8 +39,8 @@ export default function Aboutus() {
                     ✪ Step One
                   </h3>
 
-                  <p className="mb-4 text-base font-normal text-black dark:text-gray-400">
-                    Click on to the GET STARTED button then create an account by
+                  <p className="mb-4 text-base font-normal text-gray-900 dark:text-gray-900">
+                    Click on to the GET STARTED button then cilck on register to create an account by
                     filling the form that has been provided.
                   </p>
                 </li>
