@@ -1,7 +1,26 @@
+import { useEffect, useState } from "react";
 import inspo from "../../Assets/Inspiration.gif";
 import logo from "../../Assets/Logo.png";
 
 export default function Register() {
+  const [registerUser, setRegisterUser] = useState({
+    userId: "",
+    passwordHash: "",
+    confirmPasswordHash: "",
+  });
+
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    if (
+      registerUser.passwordHash !== "" &&
+      registerUser.confirmPasswordHash !== "" &&
+      registerUser.passwordHash === registerUser.confirmPasswordHash
+    ) {
+      setIsDisabled(false);
+    }
+  }, [registerUser]);
+
   return (
     <>
       <div className="grid grid-cols-1 h-screen w-full">
@@ -24,24 +43,24 @@ export default function Register() {
                 </h1>
                 <form className="space-y-4 md:space-y-6" action="#">
                   <div>
-                    <label
-                      for="RegNo"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                       User Idenification Number
                     </label>
                     <input
                       id="RegNo"
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="J31S/..../...."
-                      required=""
+                      required={true}
+                      onChange={(e) => {
+                        setRegisterUser({
+                          ...registerUser,
+                          userId: e.target.value,
+                        });
+                      }}
                     />
                   </div>
                   <div>
-                    <label
-                      for="password"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                       Password
                     </label>
                     <input
@@ -50,29 +69,50 @@ export default function Register() {
                       id="password"
                       placeholder="••••••••"
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      required=""
+                      required={true}
+                      onChange={(e) => {
+                        setRegisterUser({
+                          ...registerUser,
+                          passwordHash: e.target.value,
+                        });
+                      }}
                     />
                   </div>
                   <div>
-                    <label
-                      for="confirm-password"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                       Confirm password
                     </label>
                     <input
-                      type="confirm-password"
+                      type="password"
                       name="confirm-password"
                       id="confirm-password"
                       placeholder="••••••••"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      required=""
+                      className="bg-gray-50 border mb-3 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      required={true}
+                      onChange={(e) => {
+                        setRegisterUser({
+                          ...registerUser,
+                          confirmPasswordHash: e.target.value,
+                        });
+                      }}
                     />
                   </div>
+                  {registerUser.userId !== "" &&
+                    registerUser.passwordHash !== "" &&
+                    registerUser.confirmPasswordHash !== "" &&
+                    isDisabled && (
+                      <span className="w-full text-center p-3 bg-yellow-100 text-yellow-900">
+                        The password is not matching!!{" "}
+                      </span>
+                    )}
 
                   <button
                     type="submit"
-                    className="w-full text-white bg-primary-600 bg-blue-400 hover:bg-cyan-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    disabled={isDisabled}
+                    onClick={() => {}}
+                    className={`${
+                      isDisabled && "cursor-not-allowed"
+                    }	w-full text-white bg-primary-600 bg-blue-400 hover:bg-cyan-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
                   >
                     Create an account
                   </button>

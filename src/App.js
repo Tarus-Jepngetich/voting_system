@@ -25,8 +25,6 @@ function App() {
   const location = useLocation();
   const [path, setpath] = useState(location.pathname);
 
-  console.log(contestantObj);
-
   // spliting of the Url to get the username
   let temp = path.split("/");
   let userName = temp[temp.length - 1];
