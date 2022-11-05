@@ -44,19 +44,27 @@ router.get(`/get/count`, async (_, res) => {
 
 // creating/adding a new user
 router.post("/register", async (req, res) => {
-  let user = new User({
-    name: req.body.name,
-    passwordHash: bcrypt.hashSync(req.body.passwordHash, 10),
-    userId: req.body.userId,
-  });
-
-  user = await user.save();
+  let user = await User.findOne({ userId: req.body.userId });
 
   if (!user) {
-    return res.status(500).send("the user cannot be created");
-  }
+    user = new User({
+      name: req.body.name,
+      passwordHash: bcrypt.hashSync(req.body.passwordHash, 10),
+      userId: req.body.userId,
+    });
 
-  res.send(user);
+    user = await user.save();
+
+    if (!user) {
+      return res.status(500).send("the user cannot be created");
+    }
+
+    res.send(user);
+  } else {
+    return res
+      .status(404)
+      .json({ success: false, message: "user already exists" });
+  }
 });
 
 // login api
@@ -66,7 +74,7 @@ router.post("/login", async (req, res) => {
 
   if (!user) {
     return res.status(400).send("User not found!");
-  }
+  } 
 
   if (user && bcrypt.compareSync(req.body.passwordHash, user.passwordHash)) {
     const token = jwt.sign(

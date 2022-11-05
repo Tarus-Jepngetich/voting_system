@@ -1,13 +1,27 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import inspo from "../../Assets/Inspiration.gif";
 import logo from "../../Assets/Logo.png";
+import Toastify from "../../components/toastify";
+import { useUrlPrefix } from "../../hooks/useUrlPrefix";
+import { toast } from "react-toastify";
+import Loader from "../../components/loader";
 
 export default function Register() {
+  const notifySuccess = () =>
+    toast("Account created successfully. Proceed to login");
+  const notifyUnsuccess = () => toast("Account already exists. Try again");
+
   const [registerUser, setRegisterUser] = useState({
+    name: "",
     userId: "",
     passwordHash: "",
     confirmPasswordHash: "",
   });
+
+  const prefix = useUrlPrefix();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
 
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -42,6 +56,23 @@ export default function Register() {
                   Register
                 </h1>
                 <form className="space-y-4 md:space-y-6" action="#">
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      Name
+                    </label>
+                    <input
+                      id="name"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="J31S/..../...."
+                      required={true}
+                      onChange={(e) => {
+                        setRegisterUser({
+                          ...registerUser,
+                          name: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                       User Idenification Number
@@ -100,22 +131,64 @@ export default function Register() {
                   {registerUser.userId !== "" &&
                     registerUser.passwordHash !== "" &&
                     registerUser.confirmPasswordHash !== "" &&
+                    registerUser.name !== "" &&
                     isDisabled && (
                       <span className="w-full text-center p-3 bg-yellow-100 text-yellow-900">
                         The password is not matching!!{" "}
                       </span>
                     )}
+                  <Toastify>
+                    <button
+                      type="submit"
+                      disabled={isDisabled}
+                      onClick={async () => {
+                        setIsLoading(true);
+                        try {
+                          const response = await fetch(
+                            `${prefix}/user/register`,
+                            {
+                              method: "POST",
+                              headers: {
+                                "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify(registerUser),
+                            }
+                          );
 
-                  <button
-                    type="submit"
-                    disabled={isDisabled}
-                    onClick={() => {}}
-                    className={`${
-                      isDisabled && "cursor-not-allowed"
-                    }	w-full text-white bg-primary-600 bg-blue-400 hover:bg-cyan-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
-                  >
-                    Create an account
-                  </button>
+                          const responseData = await response.json();
+
+                          if (responseData.success === false) {
+                            setError(true);
+                          }
+
+                          // console.log("resdata", responseData.success);
+                        } catch (err) {
+                          setError(true);
+                          console.log(err);
+                        }
+                        setIsLoading(false);
+                        if (error === false) {
+                          notifySuccess();
+                        } else {
+                          notifyUnsuccess();
+                        }
+
+                        setError(false);
+                        setRegisterUser({
+                          name: "",
+                          userId: "",
+                          passwordHash: "",
+                          confirmPasswordHash: "",
+                        });
+                      }}
+                      className={`${
+                        isDisabled && "cursor-not-allowed"
+                      }	w-full text-white bg-primary-600 bg-blue-400 hover:bg-cyan-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
+                    >
+                      {isLoading && <Loader />}
+                      Create an account
+                    </button>
+                  </Toastify>
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                     Already have an account?{" "}
                     <a

@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUrlPrefix } from "../../hooks/useUrlPrefix";
 
 export default function LoginModal({ setIsToggled }) {
+  const [loginUser, setLoginUser] = useState({
+    userId: "",
+    passwordHash: "",
+  });
+  const prefix = useUrlPrefix();
   const navigate = useNavigate();
   return (
     <>
@@ -26,7 +33,7 @@ export default function LoginModal({ setIsToggled }) {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                   clip-rule="evenodd"
                 ></path>
@@ -46,8 +53,10 @@ export default function LoginModal({ setIsToggled }) {
                     User Idenification Number
                   </label>
                   <input
-            
                     id="RegNo"
+                    onChange={({ target: { value } }) => {
+                      setLoginUser({ ...loginUser, userId: value });
+                    }}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="J31S/..../...."
                     required=""
@@ -63,6 +72,9 @@ export default function LoginModal({ setIsToggled }) {
                   <input
                     type="password"
                     name="password"
+                    onChange={({ target: { value } }) => {
+                      setLoginUser({ ...loginUser, passwordHash: value });
+                    }}
                     id="password"
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -73,7 +85,26 @@ export default function LoginModal({ setIsToggled }) {
                 <button
                   type="submit"
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  onClick={() => navigate("/home")}
+                  onClick={() => {
+                    fetch(`${prefix}/user/login`, {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(loginUser),
+                    })
+                      .then((res) => {
+                        if (res.ok) {
+                          localStorage.setItem(
+                            "jwt",
+                            JSON.stringify({ login: true, token: res.token })
+                          );
+                          return res;
+                        } else return new Error("I am not okay");
+                      })
+                      .catch((e) => console.log(e));
+                    // navigate("/home");
+                  }}
                 >
                   Login to your account
                 </button>

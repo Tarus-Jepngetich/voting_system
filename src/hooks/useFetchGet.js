@@ -2,7 +2,7 @@ import { useUrlPrefix } from "./useUrlPrefix";
 
 import { useState, useEffect } from "react";
 
-export function useFetchGet(path) {
+export function useFetchGet(path, token) {
   const prefix = useUrlPrefix();
   const url = prefix + path;
   const [response, setResponse] = useState(null);
@@ -13,7 +13,12 @@ export function useFetchGet(path) {
     const doFetch = async () => {
       setLoading(true);
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, {
+          headers: {
+            Authorization: `${!!token} ? bearer ${token} : ""`,
+            "Content-Type": "application/json",
+          },
+        });
         const json = await res.json();
         setResponse(json);
       } catch (e) {
