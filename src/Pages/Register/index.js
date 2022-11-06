@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import inspo from "../../Assets/Inspiration.gif";
 import logo from "../../Assets/Logo.png";
-import Toastify from "../../components/toastify";
 import { useUrlPrefix } from "../../hooks/useUrlPrefix";
-import { toast } from "react-toastify";
 import Loader from "../../components/loader";
+import ErrorModal from "../../components/errorModal";
 
 export default function Register() {
-  const notifySuccess = () =>
-    toast("Account created successfully. Proceed to login");
-  const notifyUnsuccess = () => toast("Account already exists. Try again");
+  const [isHidden, setIsHidden] = useState(true);
 
   const [registerUser, setRegisterUser] = useState({
     name: "",
@@ -22,6 +18,7 @@ export default function Register() {
   const prefix = useUrlPrefix();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+  const [data, setData] = useState();
 
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -35,9 +32,30 @@ export default function Register() {
     }
     setError(undefined);
   }, [registerUser]);
-
+  const message = error ? (
+    <div>
+      Creation of your account was unsuccessful!!
+      <br />
+      Please try again!
+    </div>
+  ) : (
+    <div>
+      Creation of your account was successful!!
+      <br />
+      Procced to login
+    </div>
+  );
   return (
     <>
+      <ErrorModal
+        isHidden={isHidden}
+        setIsHidden={setIsHidden}
+        setError={setError}
+        error={error}
+      >
+        {message}
+      </ErrorModal>
+
       <div className="grid grid-cols-1 h-screen w-full">
         <section className="flex place-items-center justify-center bg-gradient-to-r from-pink-400 to-cyan-200 dark:bg-gray-900">
           <div className="hidden md:block ">
@@ -160,8 +178,11 @@ export default function Register() {
                         if (!response.ok) {
                           throw new Error(responseData.message);
                         }
+                        setData(responseData);
+                        setIsHidden(false);
                       } catch (err) {
                         setError(true);
+                        setIsHidden(false);
                       }
                       setIsLoading(false);
                     }}
@@ -172,9 +193,6 @@ export default function Register() {
                     {isLoading && <Loader />}
                     Create an account
                   </button>
-                  {error === true && <Toastify notify={notifyUnsuccess} />}
-                  {error === false && <Toastify notify={notifySuccess} />}
-
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                     Already have an account?{" "}
                     <a
