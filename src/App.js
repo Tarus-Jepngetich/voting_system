@@ -13,6 +13,7 @@ import LandingPage from "./Pages/LandingPage";
 import { useNavigate } from "react-router-dom";
 import User from "./Pages/user";
 import Register from "./Pages/Register";
+import Login from "./Pages/login";
 
 const contestantObj = contestants.reduce((accumulator, currentValue) => {
   // destructring the current value
@@ -49,6 +50,11 @@ function App() {
       ) : path === "/aboutus" ? (
         <>
           <Aboutus />
+        </>
+      ) : path === "/login" ? (
+        <>
+          {" "}
+          <Login />{" "}
         </>
       ) : (
         <>

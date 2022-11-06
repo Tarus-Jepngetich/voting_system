@@ -33,6 +33,7 @@ export default function Register() {
     ) {
       setIsDisabled(false);
     }
+    setError(undefined);
   }, [registerUser]);
 
   return (
@@ -63,12 +64,12 @@ export default function Register() {
                     <input
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="J31S/..../...."
+                      placeholder="Jane Doe"
                       required={true}
                       onChange={(e) => {
                         setRegisterUser({
                           ...registerUser,
-                          name: e.target.value,
+                          name: e.target.value.trim(),
                         });
                       }}
                     />
@@ -85,7 +86,7 @@ export default function Register() {
                       onChange={(e) => {
                         setRegisterUser({
                           ...registerUser,
-                          userId: e.target.value,
+                          userId: e.target.value.trim(),
                         });
                       }}
                     />
@@ -137,58 +138,43 @@ export default function Register() {
                         The password is not matching!!{" "}
                       </span>
                     )}
-                  <Toastify>
-                    <button
-                      type="submit"
-                      disabled={isDisabled}
-                      onClick={async () => {
-                        setIsLoading(true);
-                        try {
-                          const response = await fetch(
-                            `${prefix}/user/register`,
-                            {
-                              method: "POST",
-                              headers: {
-                                "Content-Type": "application/json",
-                              },
-                              body: JSON.stringify(registerUser),
-                            }
-                          );
-
-                          const responseData = await response.json();
-
-                          if (responseData.success === false) {
-                            setError(true);
-                          }
-
-                          // console.log("resdata", responseData.success);
-                        } catch (err) {
-                          setError(true);
-                          console.log(err);
-                        }
-                        setIsLoading(false);
-                        if (error === false) {
-                          notifySuccess();
-                        } else {
-                          notifyUnsuccess();
-                        }
-
+                  <button
+                    type="submit"
+                    disabled={isDisabled}
+                    onClick={async () => {
+                      setIsLoading(true);
+                      try {
                         setError(false);
-                        setRegisterUser({
-                          name: "",
-                          userId: "",
-                          passwordHash: "",
-                          confirmPasswordHash: "",
-                        });
-                      }}
-                      className={`${
-                        isDisabled && "cursor-not-allowed"
-                      }	w-full text-white bg-primary-600 bg-blue-400 hover:bg-cyan-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
-                    >
-                      {isLoading && <Loader />}
-                      Create an account
-                    </button>
-                  </Toastify>
+                        const response = await fetch(
+                          `${prefix}/user/register`,
+                          {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(registerUser),
+                          }
+                        );
+
+                        const responseData = await response.json();
+                        if (!response.ok) {
+                          throw new Error(responseData.message);
+                        }
+                      } catch (err) {
+                        setError(true);
+                      }
+                      setIsLoading(false);
+                    }}
+                    className={`${
+                      isDisabled && "cursor-not-allowed"
+                    }	w-full text-white bg-primary-600 bg-blue-400 hover:bg-cyan-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
+                  >
+                    {isLoading && <Loader />}
+                    Create an account
+                  </button>
+                  {error === true && <Toastify notify={notifyUnsuccess} />}
+                  {error === false && <Toastify notify={notifySuccess} />}
+
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                     Already have an account?{" "}
                     <a

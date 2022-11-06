@@ -7,7 +7,7 @@ export default function Home() {
       <div className=" mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 absolute place-items-center h-1"></div>
 
       <div
-        class="bg-white py-12"
+        className="bg-white py-12"
         style={{
           backgroundImage: `url(${phone})`,
           backgroundPosition: "center",
@@ -30,9 +30,7 @@ export default function Home() {
             <dl className="space-y-10 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 md:space-y-0">
               <div className="relative">
                 <dt>
-                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
-                   
-                  </div>
+                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white"></div>
                   <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
                     Why Should I Vote?
                   </p>
@@ -44,9 +42,7 @@ export default function Home() {
 
               <div className="relative">
                 <dt>
-                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
-                    
-                  </div>
+                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white"></div>
                   <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
                     Importance of Voting.
                   </p>
@@ -61,9 +57,7 @@ export default function Home() {
 
               <div className="relative">
                 <dt>
-                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
-                    
-                  </div>
+                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white"></div>
                   <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
                     You have the right to...
                   </p>
@@ -74,8 +68,6 @@ export default function Home() {
                   ensure your privacy.
                 </dd>
               </div>
-
-              
             </dl>
           </div>
         </div>
