@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader";
 import { useUser } from "../../context";
+import { useGlobalUser } from "../../hooks/useGlobalUser";
 import { useUrlPrefix } from "../../hooks/useUrlPrefix";
 
 export default function Login() {
@@ -12,6 +13,7 @@ export default function Login() {
     passwordHash: "",
   });
   const [user, setUser] = useState();
+  const global = useGlobalUser();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const prefix = useUrlPrefix();
@@ -24,6 +26,8 @@ export default function Login() {
       navigate("/home");
     }
   }, [user]);
+
+  console.log(user)
 
   return (
     <>
@@ -74,6 +78,7 @@ export default function Login() {
 
                       try {
                         setError(false);
+                        setUser(null);
                         const response = await fetch(`${prefix}/user/login`, {
                           method: "POST",
                           headers: {
@@ -105,13 +110,13 @@ export default function Login() {
                     Login
                   </button>
                   {!isLoading && user === null && (
-                    <span>Your details are not correct</span>
+                    <span className="p-4 text-red-400">Your details are not correct</span>
                   )}
                   <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}
                     <a
                       href="/Register"
-                      className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                      className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out"
                     >
                       Register
                     </a>

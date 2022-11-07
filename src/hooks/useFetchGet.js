@@ -15,7 +15,7 @@ export function useFetchGet(path, token) {
       try {
         const res = await fetch(url, {
           headers: {
-            Authorization: `${!!token} ? bearer ${token} : ""`,
+            // Authorization: `${!!token} ? bearer ${token} : ""`,
             "Content-Type": "application/json",
           },
         });
