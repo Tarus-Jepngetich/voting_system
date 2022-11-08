@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import kamala from "../../Assets/kamala.jpg";
-import { useFetchGet } from "../../hooks/useFetchGet";
-import { useGlobalUser } from "../../hooks/useGlobalUser";
 
 export { default as EditContestant } from "./contenstant";
 export { default as EditSchool } from "./school";

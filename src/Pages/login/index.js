@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader";
 import { useUser } from "../../context";
-import { useGlobalUser } from "../../hooks/useGlobalUser";
 import { useUrlPrefix } from "../../hooks/useUrlPrefix";
 
 export default function Login() {
@@ -13,7 +12,6 @@ export default function Login() {
     passwordHash: "",
   });
   const [user, setUser] = useState();
-  const global = useGlobalUser();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const prefix = useUrlPrefix();
@@ -27,7 +25,6 @@ export default function Login() {
     }
   }, [user]);
 
-  console.log(user)
 
   return (
     <>
