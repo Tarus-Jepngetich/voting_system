@@ -9,8 +9,14 @@ export const useLocalStorage = () => {
 
   if (global !== null) {
     const globalObj = JSON.parse(global);
-    return { userId: globalObj.user, token: globalObj.token };
+    const userId = globalObj.user.userId;
+    const name = globalObj.user.name;
+    const id = globalObj.user.id;
+    const isAdmin = globalObj.user.isAdmin;
+    const token = globalObj.token;
+
+    return { userId, name, id, isAdmin, token };
   }
 
-  return { userId: "", token: "" };
+  return { userId: "", name: "", id: "", isAdmin: "", token: "" };
 };

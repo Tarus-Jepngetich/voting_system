@@ -24,7 +24,6 @@ import Admin, {
   EditUser,
 } from "./Pages/Admin";
 import { useLocalStorage } from "./hooks/useLocalStorage";
-import { useCurrentUser } from "./hooks/useCurrentUser";
 
 const contestantObj = contestants.reduce((accumulator, currentValue) => {
   // destructring the current value
@@ -42,7 +41,6 @@ function App() {
   // spliting of the Url to get the username
   let temp = path.split("/");
   let userName = temp[temp.length - 1];
-  const user = useCurrentUser();
 
   useEffect(() => {
     function updatepath() {
@@ -51,7 +49,6 @@ function App() {
     updatepath();
   }, [location]);
 
-  console.log(user);
   return (
     <>
       {path === "/Register" ? (

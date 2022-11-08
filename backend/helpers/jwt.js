@@ -14,10 +14,10 @@ function authJwt() {
       // regular expressions
       // ^(.+)\/([^\/]+)$
       { url: /\/public\/uploads(.*)/, methods: ["GET", "OPTIONS"] },
-      { url: /\/contestant(.*)/, methods: ["PUT", "GET", "POST", "OPTIONS"] },   
+      { url: /\/contestant(.*)/, methods: ["PUT", "GET", "POST", "OPTIONS"] },
       { url: /\/school(.*)/, methods: ["GET", "OPTIONS"] },
-      { url: /^\/student\/(.*)/, methods: ["GET", "POST", "PUT", "OPTIONS"] },    
-      { url: /^\/user\/(.*)/, methods: ["GET", "POST", "PUT", "OPTIONS"] },
+      { url: /^\/student\/(.*)/, methods: ["GET", "POST", "PUT", "OPTIONS"] },
+      { url: /^\/user\/(.*)/, methods: ["POST", "PUT", "OPTIONS"] },
 
       // `/user/register`,
       // `/user/login`,

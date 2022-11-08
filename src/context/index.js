@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { useAllUsers } from "../hooks/useAllUsers";
 
 const UserContext = createContext(null);
 
