@@ -21,3 +21,4 @@ schoolSchema.set("toJSON", {
 
 // creating the model
 exports.School = mongoose.model("School", schoolSchema, "school");
+exports.schoolSchema = schoolSchema;

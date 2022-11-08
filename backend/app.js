@@ -6,8 +6,8 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 
 // jwt imports
-// const authJwt = require("./helpers/jwt");
-// const errorHandler = require("./helpers/error-handler");
+const authJwt = require("./helpers/jwt");
+const errorHandler = require("./helpers/error-handler");
 
 // routes imports
 const studentRoutes = require("./routes/student");
@@ -29,10 +29,8 @@ app.options("*", cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
-// app.use(authJwt());
-// app.use(errorHandler);
-
-
+app.use(authJwt());
+app.use(errorHandler);
 
 // connecting our api to our server using mongoose
 mongoose
@@ -54,9 +52,8 @@ app.listen(PORT, () => {
   console.log(`server is running on http://localhost:${PORT}`);
 });
 
-
 // Routes
-app.use('/student', studentRoutes)
-app.use('/user' , userRoutes)
-app.use('/school', schoolRoutes)
-app.use('/contestant', contestantRoutes)
+app.use("/student", studentRoutes);
+app.use("/user", userRoutes);
+app.use("/school", schoolRoutes);
+app.use("/contestant", contestantRoutes);

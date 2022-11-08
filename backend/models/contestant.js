@@ -35,3 +35,5 @@ exports.Contestant = mongoose.model(
   contestantSchema,
   "contestant"
 );
+
+exports.contestantSchema = contestantSchema;

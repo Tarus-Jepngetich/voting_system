@@ -166,6 +166,7 @@ router.put("/:id", async (req, res) => {
     {
       image: req.body.image,
       description: req.body.description,
+      votes: req.body.votes,
     },
     { new: true }
   );

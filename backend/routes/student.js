@@ -2,7 +2,7 @@ const { Student } = require("../models/student");
 const express = require("express");
 const router = express.Router();
 
-// gets all students from the system
+// gets all students from the system   
 router.get("/", async (_, res) => {
   // let userList = null;
   const studentList = await Student.find().populate(["school", "user"]);

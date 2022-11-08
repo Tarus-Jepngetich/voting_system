@@ -27,9 +27,9 @@ function authJwt() {
 
 async function isRevokedCallback(req, { payload }) {
   if (payload.isAdmin === false) {
-    return { isRevoked: true, path: req.params.id };
+    return true;
   }
-  return { isRevoked: false, path: req.params.id };
+  return false;
 }
 
 module.exports = authJwt;
