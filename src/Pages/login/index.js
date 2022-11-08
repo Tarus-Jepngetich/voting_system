@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader";
 import { useUser } from "../../context";
 import { useUrlPrefix } from "../../hooks/useUrlPrefix";
+import axios from "axios";
 
 export default function Login() {
   const { addUser } = useUser();
@@ -21,10 +22,8 @@ export default function Login() {
   useEffect(() => {
     if (user) {
       addUser(user);
-      navigate("/home");
     }
   }, [user]);
-
 
   return (
     <>
@@ -63,52 +62,40 @@ export default function Login() {
                   />
                 </div>
 
-                <div className="text-center lg:text-left">
+                <div className="text-center flex flex-col">
+                  {!isLoading && error && (
+                    <span className="text-red-600 text-center">
+                      Your details are not correct
+                    </span>
+                  )}
                   <button
                     type="button"
                     disabled={isDisabled}
                     className={`${
                       isDisabled && "cursor-not-allowed"
-                    } flex px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out`}
-                    onClick={async () => {
+                    } px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out`}
+                    onClick={() => {
                       setIsLoading(true);
 
-                      try {
-                        setError(false);
-                        setUser(null);
-                        const response = await fetch(`${prefix}/user/login`, {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                          body: JSON.stringify(loginUser),
+                      axios
+                        .post(`${prefix}/user/login`, loginUser)
+                        .then((res) => {
+                          setError(false);
+                          setUser(res.data);
+                          localStorage.setItem("jwt", JSON.stringify(res.data));
+                          navigate("/home");
+                          window.location.reload();
+                        })
+                        .catch((err) => {
+                          setError(true);
                         });
-
-                        const responseData = await response.json();
-
-                        if (!response.ok) {
-                          throw new Error(responseData.message);
-                        }
-
-                        if (responseData) {
-                          setUser(responseData);
-                          localStorage.setItem(
-                            "jwt",
-                            JSON.stringify(responseData)
-                          );
-                        }
-                      } catch (err) {
-                        setError(true);
-                      }
                       setIsLoading(false);
                     }}
                   >
                     {isLoading && <Loader size="sm" />}
                     Login
                   </button>
-                  {!isLoading && user === null && (
-                    <span className="p-4 text-red-400">Your details are not correct</span>
-                  )}
+
                   <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}
                     <a
