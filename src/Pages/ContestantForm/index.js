@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import page from "../../Assets/page.png";
 
 export default function ContestantForm() {
+  const schools = [" ","SET", "SOE", "SPASS"];
+
+ 
   const navigate = useNavigate();
   return (
     <>
@@ -16,7 +20,7 @@ export default function ContestantForm() {
         }}
       >
         <div className="relative p-4 w-full max-w-md h-full md:h-auto ">
-          <div className="relative bg-cyan-200 rounded-lg shadow dark:bg-gray-700">
+          <div className="relative bg-gray-50 rounded-lg shadow dark:bg-gray-700">
             <button
               type="button"
               className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
@@ -70,19 +74,41 @@ export default function ContestantForm() {
                   placeholder="Jane Doe"
                   required=""
                 />
-                <label
+              <label
                   for="School"
                   className="block mt-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
                   School
                 </label>
-                <input
-                  id="RegNo"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="School of..."
-                  required=""
-                />
+             <div className="flex flex-wrap -mx-3 mb-2"> 
+             
+             <div className="w-full md:w-full px-3 mb-1 md:mb-0"> 
+           
 
+              <div className="relative flex">
+              <div className="pointer-events-none absolute   float left-56  inset-y-0 flex items-center  px-2 text-gray-700">
+                  <svg
+                    className="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+                <select
+                  className="block mr-24 appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="grid-state"
+                >
+                  {schools.map((value, i) => (
+                    <option key={i}> {value}</option>
+                  ))}
+                
+                </select>
+               
+                
+              </div>
+            </div>
+          </div> 
                 <label
                   class="block mt-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   for="file_input"
@@ -116,94 +142,17 @@ export default function ContestantForm() {
                   Submit
                 </button>
 
-                <button
-                  id="dropdownCheckboxButton"
-                  data-dropdown-toggle="dropdownDefaultCheckbox"
-                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  type="button"
-                >
-                  Dropdown checkbox{" "}
-                  <svg
-                    class="ml-2 w-4 h-4"
-                    aria-hidden="true"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 9l-7 7-7-7"
-                    ></path>
-                  </svg>
-                </button>
-
-                <div
-                  id="dropdownDefaultCheckbox"
-                  class="hidden z-10 w-48 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                >
-                  <ul
-                    class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownCheckboxButton"
-                  >
-                    <li>
-                      <div class="flex items-center">
-                        <input
-                          id="checkbox-item-1"
-                          type="checkbox"
-                          value=""
-                          class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                        />
-                        <label
-                          for="checkbox-item-1"
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                          Default checkbox
-                        </label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex items-center">
-                        <input
-                          checked
-                          id="checkbox-item-2"
-                          type="checkbox"
-                          value=""
-                          class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                        />
-                        <label
-                          for="checkbox-item-2"
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                          Checked state
-                        </label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex items-center">
-                        <input
-                          id="checkbox-item-3"
-                          type="checkbox"
-                          value=""
-                          class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                        />
-                        <label
-                          for="checkbox-item-3"
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                          Default checkbox
-                        </label>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+               
+               
+              
+              
               </div>
             </div>
           </div>
         </div>
       </div>
+      
+     
     </>
   );
 }

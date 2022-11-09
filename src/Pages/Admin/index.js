@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import kamala from "../../Assets/kamala.jpg";
+import mine from "../../Assets/mine.png";
 
 export { default as EditContestant } from "./contenstant";
 export { default as EditSchool } from "./school";
@@ -61,7 +61,7 @@ export default function Admin() {
               <div className="flex items-center">
                 <img
                   className="w-10 h-10 rounded-full mr-4"
-                  src={kamala}
+                  src={mine}
                   alt="Avatar of Jonathan Reinink"
                 />
               </div>
@@ -89,7 +89,7 @@ export default function Admin() {
               <div className="flex items-center">
                 <img
                   className="w-10 h-10 rounded-full mr-4"
-                  src={kamala}
+                  src={mine}
                   alt="Avatar of Jonathan Reinink"
                 />
               </div>
@@ -119,7 +119,7 @@ export default function Admin() {
               <div className="flex items-center">
                 <img
                   className="w-10 h-10 rounded-full mr-4"
-                  src={kamala}
+                  src={mine}
                   alt="Avatar of Jonathan Reinink"
                 />
               </div>
@@ -146,7 +146,7 @@ export default function Admin() {
               <div className="flex items-center">
                 <img
                   className="w-10 h-10 rounded-full mr-4"
-                  src={kamala}
+                  src={mine}
                   alt="Avatar of Jonathan Reinink"
                 />
               </div>

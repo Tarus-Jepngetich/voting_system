@@ -7,8 +7,8 @@ export default function Contestant() {
 
   return (
     <>
-      <div className="flex items-center justify-between mt-12">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div className="flex items-center justify-between mt-12 mr-48  sm:ml-24">
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ml-48">
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -90,7 +90,7 @@ export default function Contestant() {
           </div>
         </form>
         <form className="w-full  max-w-lg ">
-          <div className="flex   mx-3 mb-6 ">
+          <div className="flex   mx-3  ">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
