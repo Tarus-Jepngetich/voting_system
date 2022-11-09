@@ -1,42 +1,25 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
-import axios from "axios";
-import { useUrlPrefix } from "../hooks/useUrlPrefix";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { createContext, useContext, useState } from "react";
 
 const UserContext = createContext(null);
 
 export default function UserProvider({ children }) {
   const [user, setUser] = useState({});
-
-  const baseURL = useUrlPrefix();
-  const { token } = useLocalStorage();
+  const [canLogin, setCanLogin] = useState(false);
+  // const users = useAllUsers();
 
   const addUser = (_user) => {
     setUser({ ...user, _user });
   };
 
-  const authAxios = useRef(
-    axios.create({
-      baseURL: baseURL,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-  );
-
-  useEffect(() => {
-    authAxios.current = axios.create({
-      baseURL: baseURL,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  }, [token]);
-
   return (
     <UserContext.Provider
-      value={{ user, addUser: addUser, axios: authAxios.current }}
+      value={{
+        user,
+        addUser: addUser,
+        setCanLogin,
+        canLogin,
+        // users
+      }}
     >
       {children}
     </UserContext.Provider>

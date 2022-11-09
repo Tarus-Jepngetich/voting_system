@@ -3,10 +3,15 @@ import inspo from "../../Assets/Inspiration.gif";
 import logo from "../../Assets/Logo.png";
 import { useUrlPrefix } from "../../hooks/useUrlPrefix";
 import Loader from "../../components/loader";
-import ErrorModal from "../../components/errorModal";
+import axios from "axios";
+import Toastify from "../../components/toastify";
+import { toast } from "react-toastify";
 
 export default function Register() {
-  const [isHidden, setIsHidden] = useState(true);
+  const notifyError = () =>
+    toast("Account creation was unsuccessful! Try again");
+  const notifySuccess = () =>
+    toast("Your account is created successfully! Proceed to login page");
 
   const [registerUser, setRegisterUser] = useState({
     name: "",
@@ -18,7 +23,6 @@ export default function Register() {
   const prefix = useUrlPrefix();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  const [data, setData] = useState();
 
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -29,33 +33,13 @@ export default function Register() {
       registerUser.passwordHash === registerUser.confirmPasswordHash
     ) {
       setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
     }
-    setError(undefined);
   }, [registerUser]);
-  const message = error ? (
-    <div>
-      Creation of your account was unsuccessful!!
-      <br />
-      Please try again!
-    </div>
-  ) : (
-    <div>
-      Creation of your account was successful!!
-      <br />
-      Procced to login
-    </div>
-  );
+
   return (
     <>
-      <ErrorModal
-        isHidden={isHidden}
-        setIsHidden={setIsHidden}
-        setError={setError}
-        error={error}
-      >
-        {message}
-      </ErrorModal>
-
       <div className="grid grid-cols-1 h-screen w-full">
         <section className="flex place-items-center justify-center bg-gradient-to-r from-pink-400 to-cyan-200 dark:bg-gray-900">
           <div className="hidden md:block ">
@@ -156,47 +140,37 @@ export default function Register() {
                         The password is not matching!!{" "}
                       </span>
                     )}
-                  <button
-                    type="submit"
-                    disabled={isDisabled}
-                    onClick={async () => {
-                      setIsLoading(true);
-                      try {
+                  <Toastify error={error}>
+                    <button
+                      type="submit"
+                      disabled={isDisabled}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsLoading(true);
                         setError(false);
-                        const response = await fetch(
-                          `${prefix}/user/register`,
-                          {
-                            method: "POST",
-                            headers: {
-                              "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(registerUser),
-                          }
-                        );
-
-                        const responseData = await response.json();
-                        if (!response.ok) {
-                          throw new Error(responseData.message);
-                        }
-                        setData(responseData);
-                        setIsHidden(false);
-                      } catch (err) {
-                        setError(true);
-                        setIsHidden(false);
-                      }
-                      setIsLoading(false);
-                    }}
-                    className={`${
-                      isDisabled && "cursor-not-allowed"
-                    }	w-full text-white bg-primary-600 bg-blue-400 hover:bg-cyan-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
-                  >
-                    {isLoading && <Loader />}
-                    Create an account
-                  </button>
+                        axios
+                          .post(`${prefix}/user/register`, registerUser)
+                          .then((response) => {
+                            notifySuccess();
+                          })
+                          .catch((err) => {
+                            setError(true);
+                            notifyError();
+                          });
+                        setIsLoading(false);
+                      }}
+                      className={`${
+                        isDisabled && "cursor-not-allowed"
+                      }	w-full text-white bg-primary-600 bg-blue-400 hover:bg-cyan-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
+                    >
+                      {isLoading && <Loader />}
+                      Create an account
+                    </button>
+                  </Toastify>
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                     Already have an account?{" "}
                     <a
-                      href="/"
+                      href="/login"
                       className="font-medium text-primary-600 hover:underline text-cyan-400 dark:text-primary-500"
                     >
                       Login here

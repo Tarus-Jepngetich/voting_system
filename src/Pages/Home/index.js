@@ -1,7 +1,10 @@
 import React from "react";
 import phone from "../../Assets/phone.png";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 export default function Home() {
+  const user = useCurrentUser();
+
   return (
     <>
       <div className=" mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 absolute place-items-center h-1"></div>
@@ -18,7 +21,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
           <div className="lg:text-center">
             <p className="mt-2 text-3xl font-bold leading-8 tracking-tight text-indigo-600 sm:text-4xl">
-              Welcome !
+              Welcome {user !== null && user.name}!
             </p>
             <p className="mt-4 max-w-2xl text-xl text-gray-900 lg:mx-auto">
               We are excited to have you using our system. We hope you will
