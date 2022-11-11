@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 
 // jwt imports
-const authJwt = require("./helpers/jwt");
+// const authJwt = require("./helpers/jwt");
 const errorHandler = require("./helpers/error-handler");
 
 // routes imports
@@ -29,7 +29,7 @@ app.options("*", cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
-app.use(authJwt());
+// app.use(authJwt());
 app.use(errorHandler);
 
 // connecting our api to our server using mongoose
