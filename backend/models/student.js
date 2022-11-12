@@ -6,7 +6,16 @@ const studentSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
-  hasVoted: {
+  hasVotedForCongressPerson: {
+    default: false,
+    type: Boolean,
+  },
+  hasVotedForFemaleDelagate: {
+    default: false,
+    type: Boolean,
+  },
+  hasVotedForMaleDelegate: {
+    default: false,
     type: Boolean,
   },
   school: {

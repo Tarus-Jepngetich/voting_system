@@ -6,7 +6,6 @@ import Voting from "./Pages/Voting";
 import { useEffect, useState } from "react";
 import image5 from "./Assets/Logo.png";
 import profile from "./Assets/profile.png";
-import contestants from "./contestants";
 import Card from "./Pages/Voting/card";
 import Navbar from "./components/Layout/navbar";
 import LandingPage from "./Pages/LandingPage";

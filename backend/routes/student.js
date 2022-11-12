@@ -10,7 +10,7 @@ router.get("/", async (_, res) => {
   if (!studentList) {
     res.status(500).json({
       success: false,
-    });       
+    });
   }
 
   res.send(studentList);
@@ -30,7 +30,7 @@ router.get("/", async (_, res) => {
 router.get("/:id", async (req, res) => {
   const student = await Student.findById(req.params.id)
     .populate(["user", "school"])
-    .select("-passwordHash")   
+    .select("-passwordHash");
 
   if (!student) {
     res.status(500).json({
@@ -44,7 +44,6 @@ router.get("/:id", async (req, res) => {
 // get the count of student
 router.get(`/get/count`, async (_, res) => {
   const studentCount = await Student.countDocuments();
-
   if (!studentCount) {
     res.status(500).json({ success: false });
   }
@@ -74,7 +73,9 @@ router.put("/:id", async (req, res) => {
   const student = await Student.findByIdAndUpdate(
     req.params.id,
     {
-      hasVoted: req.body.hasVoted,
+      hasVotedForCongressPerson: req.body.hasVotedForCongressPerson,
+      hasVotedForFemaleDelagate: req.body.hasVotedForFemaleDelagate,
+      hasVotedForMaleDelegate: req.body.hasVotedForMaleDelegate,
     },
     { new: true }
   );

@@ -29,6 +29,8 @@ export default function Voting() {
                     description={value.description}
                     id={value.id}
                     key={i}
+                    position={value.position}
+                    votes={value.votes}
                   />
                 );
               })}
@@ -40,9 +42,7 @@ export default function Voting() {
         student.isLoading !== undefined && (
           <div className="grid place-items-center justify-center">
             <img src="https://www.gif-maniac.com/gifs/54/53631.gif" alt="" />
-            <span className="text-xl text-blue-900">
-              You're an administrator!! You're supposed to be impartial
-            </span>
+            <span className="text-xl text-blue-900">Internal Server Error</span>
           </div>
         )
       )}
