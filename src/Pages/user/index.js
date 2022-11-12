@@ -1,12 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import mine from "../../Assets/mine.png";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { useCurrentStudent } from "../../hooks/useCurrentStudent";
+
 
 export default function User() {
-  const isAdmin = true;
   const isStudent = false;
   const isContestant = false;
 
+  const { name, isAdmin } = useCurrentUser();
+  const student = useCurrentStudent()
+
   const navigate = useNavigate();
+
+  console.log(student)
   return (
     <>
       <main className="profile-page ">
@@ -84,50 +91,36 @@ export default function User() {
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
                     <div className="flex justify-center py-4 lg:pt-4 pt-8 sm:hidden">
                       <div className="mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          
-                        </span>
-                        <span className="text-sm text-blueGray-400">
-                          
-                        </span>
+                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600"></span>
+                        <span className="text-sm text-blueGray-400"></span>
                       </div>
                       <div className="mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          
-                        </span>
-                        <span className="text-sm text-blueGray-400">
-                          
-                        </span>
+                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600"></span>
+                        <span className="text-sm text-blueGray-400"></span>
                       </div>
                       <div className="lg:mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          
-                        </span>
-                        <span className="text-sm text-blueGray-400">
-                          
-                        </span>
+                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600"></span>
+                        <span className="text-sm text-blueGray-400"></span>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="text-center mt-16">
                   <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
-                    Jane Doe
+                    {name}
                   </h3>
                   <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                     <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                    Kenyatta University
+                    {student?.school?.name}
                   </div>
-                  
-                 
                 </div>
                 <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                       You can register as a contestant if you want to be elected for a post.
+                        You can register as a contestant if you want to be
+                        elected for a post.
                       </p>
-                     
                     </div>
                   </div>
                 </div>

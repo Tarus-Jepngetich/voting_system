@@ -11,6 +11,10 @@ const contestantSchema = mongoose.Schema({
     min: 0,
     default: 0,
   },
+  position: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
     default: "",

@@ -8,10 +8,12 @@ export const useCurrentStudent = () => {
   const [student, setStudent] = useState(null);
   const [students, setStudents] = useState(null);
   const [isStudent, setIsStudent] = useState(false);
+  const [isLoading, setIsLoading] = useState();
 
   const prefix = useUrlPrefix();
   const axios = authAxios(token, prefix);
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`${prefix}/student`)
       .then((res) => {
@@ -19,6 +21,9 @@ export const useCurrentStudent = () => {
       })
       .catch((err) => {
         setStudents(null);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [token]);
 
@@ -35,5 +40,5 @@ export const useCurrentStudent = () => {
     }
   }, [students, id]);
 
-  return { ...student, isStudent };
+  return { ...student, isLoading, isStudent };
 };

@@ -2,7 +2,7 @@ const { Student } = require("../models/student");
 const express = require("express");
 const router = express.Router();
 
-// gets all students from the system   
+// gets all students from the system
 router.get("/", async (_, res) => {
   // let userList = null;
   const studentList = await Student.find().populate(["school", "user"]);
@@ -10,7 +10,7 @@ router.get("/", async (_, res) => {
   if (!studentList) {
     res.status(500).json({
       success: false,
-    });
+    });       
   }
 
   res.send(studentList);
@@ -28,7 +28,9 @@ router.get("/", async (_, res) => {
 
 // gets a specific student
 router.get("/:id", async (req, res) => {
-  const student = await Student.findById(req.params.id).select("-passwordHash");
+  const student = await Student.findById(req.params.id)
+    .populate(["user", "school"])
+    .select("-passwordHash")   
 
   if (!student) {
     res.status(500).json({

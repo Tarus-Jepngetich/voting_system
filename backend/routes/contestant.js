@@ -67,7 +67,9 @@ router.put("/:id", uploadOptions.single("image"), async (req, res) => {
 
 // gets all contestants from the system
 router.get("/", async (_, res) => {
-  const contestantList = await Contestant.find();
+  const contestantList = await Contestant.find()
+    .populate("student")
+    .populate({ path: "student", populate: "user" });
 
   if (!contestantList) {
     res.status(500).json({
@@ -80,9 +82,10 @@ router.get("/", async (_, res) => {
 
 // gets a specific user
 router.get("/:id", async (req, res) => {
-  const contestant = await Contestant.findById(req.params.id).select(
-    "-passwordHash"
-  );
+  const contestant = await Contestant.findById(req.params.id)
+    .populate("student")
+    .populate({ path: "student", populate: "user" })
+    .select("-passwordHash");
 
   if (!contestant) {
     res.status(500).json({

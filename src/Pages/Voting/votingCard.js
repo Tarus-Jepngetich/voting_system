@@ -1,7 +1,7 @@
 import img1 from "../../Assets/vote.png";
 import { useNavigate } from "react-router-dom";
 
-export default function VotingCard({ img, name, description }) {
+export default function VotingCard({ img, name, description, id }) {
   const navigate = useNavigate();
 
   return (
@@ -9,7 +9,7 @@ export default function VotingCard({ img, name, description }) {
       <div className="flex flex-row place-content-center py-6">
         <div
           className="h-96 max-h-full w-96 max-w-full rounded overflow-hidden shadow-lg"
-          onClick={() => navigate(`/Voting/${name}`)}
+          onClick={() => navigate(`/Voting/${id}`)}
         >
           <img
             className="w-full h-64"

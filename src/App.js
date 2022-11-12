@@ -24,12 +24,8 @@ import Admin, {
   EditUser,
 } from "./Pages/Admin";
 import { useLocalStorage } from "./hooks/useLocalStorage";
-
-const contestantObj = contestants.reduce((accumulator, currentValue) => {
-  // destructring the current value
-  const { name } = currentValue;
-  return { ...accumulator, [name]: currentValue };
-}, {});
+import { useCurrentUser } from "./hooks/useCurrentUser";
+import { useAllContestants } from "./hooks/useAllContestants";
 
 function App() {
   const { addUser } = useUser();
@@ -37,10 +33,12 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [path, setpath] = useState(location.pathname);
+  const { isAdmin } = useCurrentUser();
+  const contestants = useAllContestants();
 
   // spliting of the Url to get the username
   let temp = path.split("/");
-  let userName = temp[temp.length - 1];
+  let contestantId = temp[temp.length - 1];
 
   useEffect(() => {
     function updatepath() {
@@ -48,6 +46,13 @@ function App() {
     }
     updatepath();
   }, [location]);
+
+  const _contestants =
+    contestants !== null &&
+    contestants.reduce((acc, currentValue) => {
+      const { id } = currentValue;
+      return { ...acc, [id]: currentValue };
+    }, {});
 
   return (
     <>
@@ -145,15 +150,17 @@ function App() {
                     }
                   ></Route>
 
-                  <Route
-                    exact
-                    path="/Admin"
-                    element={
-                      <div className="sm:px-4 py-2.5 px-2">
-                        <Admin />
-                      </div>
-                    }
-                  ></Route>
+                  {isAdmin && (
+                    <Route
+                      exact
+                      path="/Admin"
+                      element={
+                        <div className="sm:px-4 py-2.5 px-2">
+                          <Admin />
+                        </div>
+                      }
+                    ></Route>
+                  )}
 
                   <Route
                     exact
@@ -184,49 +191,57 @@ function App() {
                     }
                   ></Route>
 
-                  <Route
-                    exact
-                    path="/EditContestant"
-                    element={
-                      <div className="sm:px-4 py-2.5 px-2">
-                        <EditContestant />
-                      </div>
-                    }
-                  ></Route>
-                  <Route
-                    exact
-                    path="/EditSchool"
-                    element={
-                      <div className="sm:px-4 py-2.5 px-2">
-                        <EditSchool />
-                      </div>
-                    }
-                  ></Route>
-                  <Route
-                    exact
-                    path="/EditStudent"
-                    element={
-                      <div className="sm:px-4 py-2.5 px-2">
-                        <EditStudent />
-                      </div>
-                    }
-                  ></Route>
-                  <Route
-                    exact
-                    path="/EditUser"
-                    element={
-                      <div className="sm:px-4 py-2.5 px-2">
-                        <EditUser />
-                      </div>
-                    }
-                  ></Route>
+                  {isAdmin && (
+                    <Route
+                      exact
+                      path="/EditContestant"
+                      element={
+                        <div className="sm:px-4 py-2.5 px-2">
+                          <EditContestant />
+                        </div>
+                      }
+                    ></Route>
+                  )}
+                  {isAdmin && (
+                    <Route
+                      exact
+                      path="/EditSchool"
+                      element={
+                        <div className="sm:px-4 py-2.5 px-2">
+                          <EditSchool />
+                        </div>
+                      }
+                    ></Route>
+                  )}
+                  {isAdmin && (
+                    <Route
+                      exact
+                      path="/EditStudent"
+                      element={
+                        <div className="sm:px-4 py-2.5 px-2">
+                          <EditStudent />
+                        </div>
+                      }
+                    ></Route>
+                  )}
+                  {isAdmin && (
+                    <Route
+                      exact
+                      path="/EditUser"
+                      element={
+                        <div className="sm:px-4 py-2.5 px-2">
+                          <EditUser />
+                        </div>
+                      }
+                    ></Route>
+                  )}
 
                   <Route
                     exact
-                    path={`/Voting/${userName}`}
+                    path={`/Voting/${contestantId}`}
                     element={
                       <div className="sm:px-4 py-2.5 px-2">
-                        <Card person={contestantObj[userName]} />
+                        <Card contestant={_contestants[contestantId]} />
                       </div>
                     }
                   ></Route>
@@ -322,7 +337,7 @@ function App() {
 
                   <Route
                     exact
-                    path={`/Voting/${userName}`}
+                    path={`/Voting/${contestantId}`}
                     element={
                       <div className="sm:px-4 py-2.5 px-2">
                         <LandingPage />
