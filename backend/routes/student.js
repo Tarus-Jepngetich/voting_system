@@ -67,7 +67,7 @@ router.post("/", async (req, res) => {
 
   res.send(student);
 });
-
+    
 // updating
 router.put("/:id", async (req, res) => {
   const student = await Student.findByIdAndUpdate(

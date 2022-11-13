@@ -22,7 +22,7 @@ export const useCurrentContestant = (studentId) => {
   useEffect(() => {
     if (contestants) {
       const _contestant = contestants.filter(
-        (value) => value.student === studentId
+        (value) => value.student.id === studentId
       );
 
       if (_contestant.length > 0) {

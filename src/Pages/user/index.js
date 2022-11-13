@@ -2,18 +2,27 @@ import { useNavigate } from "react-router-dom";
 import mine from "../../Assets/mine.png";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { useCurrentStudent } from "../../hooks/useCurrentStudent";
-
+import { useCurrentContestant } from "../../hooks/useCurrentContestant";
+import { useEffect, useState } from "react";
 
 export default function User() {
-  const isStudent = false;
-  const isContestant = false;
-
   const { name, isAdmin } = useCurrentUser();
-  const student = useCurrentStudent()
+  const student = useCurrentStudent();
+  const [isStudent, setIsStudent] = useState();
+  const [isContestant, setIsContestant] = useState();
+
+  const contestant = useCurrentContestant(student.id);
+
+  useEffect(() => {
+    setIsStudent(student.isStudent);
+  }, [student]);
+
+  useEffect(() => {
+    setIsContestant(contestant.isContestant);
+  }, [contestant]);
 
   const navigate = useNavigate();
 
-  console.log(student)
   return (
     <>
       <main className="profile-page ">
@@ -69,9 +78,9 @@ export default function User() {
                         onClick={
                           isAdmin
                             ? () => navigate("/Admin")
-                            : isStudent
+                            : isStudent && !isContestant
                             ? () => navigate("/ContestantForm")
-                            : isContestant
+                            : isStudent && isContestant
                             ? () => navigate("/user")
                             : () => navigate("/StudentForm")
                         }
@@ -80,9 +89,9 @@ export default function User() {
                       >
                         {isAdmin
                           ? "Connect to Admin panel"
-                          : isStudent
+                          : isStudent && !isContestant
                           ? "Enroll as contestant"
-                          : isContestant
+                          : isStudent && isContestant
                           ? ""
                           : "Enroll as student"}
                       </button>
