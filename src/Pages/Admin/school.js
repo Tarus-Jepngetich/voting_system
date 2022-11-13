@@ -7,16 +7,18 @@ import { toast } from "react-toastify";
 import Toastify from "../../components/toastify";
 
 export default function School() {
-
   const [schoolId, setSchoolId] = useState("");
   const [deleteSchool, setDeleteSchool] = useState(null);
+  const [addSchool, setAddSchool] = useState({
+    schoolId: "",
+    name: "",
+  });
 
   const schools = useAllSchools();
   const prefix = useUrlPrefix();
 
-  const notifyDeleteError = () => toast("Delete Operation Failed");
-  const notifyDeleteSuccess = () =>
-    toast("The School was deleted successfully");
+  const notifyError = () => toast("Operation Failed");
+  const notifySuccess = () => toast("Operation successful");
 
   useEffect(() => {
     if (schools !== null)
@@ -33,7 +35,9 @@ export default function School() {
                 School Id
               </label>
               <input
-                onChange={(event) => setSchoolId(event.target.value)}
+                onChange={(event) =>
+                  setAddSchool({ ...addSchool, schoolId: event.target.value })
+                }
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 id="grid-first-name"
                 type="RegNo"
@@ -46,6 +50,9 @@ export default function School() {
               </label>
 
               <input
+                onChange={(e) =>
+                  setAddSchool({ ...addSchool, name: e.target.value })
+                }
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-last-name"
                 type="text"
@@ -53,14 +60,20 @@ export default function School() {
               />
             </div>
             <div className="float-right mx-48 mb-2  ">
-              <button
-                className="  bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded "
-                onClick={(e) => {
-                  e.preventDefault();
-                }}
-              >
-                Update
-              </button>
+              <Toastify>
+                <button
+                  className="  bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded "
+                  onClick={(e) => {
+                    e.preventDefault();
+                    axios
+                      .post(`${prefix}/school`, addSchool)
+                      .then(() => notifySuccess())
+                      .catch(() => notifyError());
+                  }}
+                >
+                  Update
+                </button>
+              </Toastify>
             </div>
           </div>
 
@@ -98,13 +111,13 @@ export default function School() {
                     onClick={(e) => {
                       e.preventDefault();
                       if (deleteSchool.length === 0) {
-                        notifyDeleteError();
+                        notifyError();
                         return;
                       }
                       axios
                         .delete(`${prefix}/school/${deleteSchool[0].id}`)
-                        .then(() => notifyDeleteSuccess())
-                        .catch(() => notifyDeleteError());
+                        .then(() => notifySuccess())
+                        .catch(() => notifyError());
                     }}
                     className="  bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded "
                   >

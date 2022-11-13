@@ -8,7 +8,7 @@ const contestantSchema = mongoose.Schema({
   },
   votes: {
     type: Number,
-    min: 0,  
+    min: 0,     
     default: 0,
   },
   position: {

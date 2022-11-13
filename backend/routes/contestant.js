@@ -119,6 +119,7 @@ router.post("/", uploadOptions.single("image"), async (req, res) => {
     student: req.body.student,
     description: req.body.description,
     image: `${basePath}${filename}`,
+    position: req.body.position,
   });
 
   contestant = await contestant.save();
