@@ -1,23 +1,15 @@
+import { Navigate, useNavigate } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
-import page from "../../Assets/page.png";
+export default function StudentForm(){
 
-export default function ContestantForm() {
-  const schools = [" ","SET", "SOE", "SPASS"];
+   
+        const schools = [" ","SET", "SOE", "SPASS"];
 
- 
-  const navigate = useNavigate();
-  return (
-    <>
-      <div
-        className="grid place-items-center h-screen w-full "
-        style={{
-          backgroundImage: `url(${page})`,
-          backgroundPosition: "center",
-          // opacity:"50%",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
+    const navigate = useNavigate();
+    return(
+        <><div
+        className="grid place-items-center h-screen w-full bg-gradient-to-r from-pink-200 to-cyan-200 "
+     
       >
         <div className="relative p-4 w-full max-w-md h-full md:h-auto ">
           <div className="relative bg-gray-50 rounded-lg shadow dark:bg-gray-700">
@@ -99,7 +91,8 @@ export default function ContestantForm() {
                   className="block mr-24 appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-state"
                 >
-                  {schools.map((value, i) => (
+                
+                 {schools.map((value, i) => (
                     <option key={i}> {value}</option>
                   ))}
                 
@@ -121,19 +114,7 @@ export default function ContestantForm() {
                   type="file"
                 />
 
-                <label
-                  for="message"
-                  className="block mt-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-                >
-                  Description
-                </label>
-                <textarea
-                  id="message"
-                  rows="2"
-                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Write a short description about your agenda and, or yourself"
-                  required=""
-                ></textarea>
+              
 
                 <button
                   type="submit"
@@ -152,7 +133,6 @@ export default function ContestantForm() {
         </div>
       </div>
       
-     
-    </>
-  );
+     </>
+    );
 }

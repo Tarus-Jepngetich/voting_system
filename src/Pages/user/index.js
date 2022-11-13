@@ -73,7 +73,7 @@ export default function User() {
                             ? () => navigate("/ContestantForm")
                             : isContestant
                             ? () => navigate("/user")
-                            : () => navigate("/student")
+                            : () => navigate("/StudentForm")
                         }
                         className="bg-blue-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none  sm:float-right px-1 ease-linear transition-all duration-150"
                         type="button"

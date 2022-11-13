@@ -25,6 +25,7 @@ import Admin, {
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { useCurrentUser } from "./hooks/useCurrentUser";
 import { useAllContestants } from "./hooks/useAllContestants";
+import StudentForm from "./Pages/StudentForm/Index";
 
 function App() {
   const { addUser } = useUser();
@@ -34,6 +35,7 @@ function App() {
   const [path, setpath] = useState(location.pathname);
   const { isAdmin } = useCurrentUser();
   const contestants = useAllContestants();
+
 
   // spliting of the Url to get the username
   let temp = path.split("/");
@@ -170,6 +172,15 @@ function App() {
                       </div>
                     }
                   ></Route>
+                   <Route
+                    exact
+                    path="/StudentForm"
+                    element={
+                      <div className="sm:px-4 py-2.5 px-2">
+                        <StudentForm />
+                      </div>
+                    }
+                  ></Route>
 
                   <Route
                     exact
@@ -270,6 +281,15 @@ function App() {
                   <Route
                     exact
                     path="/ContestantForm"
+                    element={
+                      <div className="sm:px-4 py-2.5 px-2">
+                        <LandingPage />
+                      </div>
+                    }
+                  ></Route>
+                   <Route
+                    exact
+                    path="/StudentForm"
                     element={
                       <div className="sm:px-4 py-2.5 px-2">
                         <LandingPage />
