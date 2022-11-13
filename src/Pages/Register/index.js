@@ -38,6 +38,11 @@ export default function Register() {
     }
   }, [registerUser]);
 
+  const correctUserId = (userId) => {
+    const arr = userId.split("/");
+    return arr.length === 3;
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 h-screen w-full">
@@ -82,7 +87,7 @@ export default function Register() {
                     </label>
                     <input
                       id="RegNo"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 mb-3 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="J31S/..../...."
                       required={true}
                       onChange={(e) => {
@@ -92,6 +97,12 @@ export default function Register() {
                         });
                       }}
                     />
+                    {registerUser.userId !== "" &&
+                      !correctUserId(registerUser.userId) && (
+                        <span className="w-full text-center p-3 bg-yellow-100 text-yellow-900 rounded-lg">
+                          "Enter Correct Format of User Id"
+                        </span>
+                      )}
                   </div>
                   <div>
                     <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">

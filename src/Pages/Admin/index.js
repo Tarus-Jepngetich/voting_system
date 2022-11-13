@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import mine from "../../Assets/mine.png";
+import { useAllUsers } from "../../hooks/useAllUsers";
+import { useAllSchools } from "../../hooks/useAllSchools";
+import { useAllContestants } from "../../hooks/useAllContestants";
+import { useAllStudents } from "../../hooks/useAllStudents";
 
 export { default as EditContestant } from "./contenstant";
 export { default as EditSchool } from "./school";
@@ -8,31 +12,35 @@ export { default as EditUser } from "./user";
 
 export default function Admin() {
   const navigate = useNavigate();
+  const users = useAllUsers();
+  const schools = useAllSchools();
+  const contestants = useAllContestants();
+  const students = useAllStudents();
   return (
     <>
       <div className="w-full ">
         <div className="flex justify-center py-4 lg:pt-4 pt-8">
           <div className="mr-4 p-3 text-center">
             <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-              0
+              {students?.length}
             </span>
             <span className="text-sm text-blueGray-400">Students</span>
           </div>
           <div className="mr-4 p-3 text-center">
             <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-              0
+              {users?.length}
             </span>
             <span className="text-sm text-blueGray-400">Users</span>
           </div>
           <div className="lg:mr-4 p-3 text-center">
             <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-              0
+              {schools?.length}
             </span>
             <span className="text-sm text-blueGray-400">Schools</span>
           </div>
           <div className="lg:mr-4 p-3 text-center">
             <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-              0
+              {contestants?.length}
             </span>
             <span className="text-sm text-blueGray-400">Contestants</span>
           </div>
