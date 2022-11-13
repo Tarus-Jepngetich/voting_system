@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import mine from "../../Assets/mine.png";
+import mine from "../../Assets/profile.png";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { useCurrentStudent } from "../../hooks/useCurrentStudent";
 import { useCurrentContestant } from "../../hooks/useCurrentContestant";
 import { useEffect, useState } from "react";
+import Loader from "../../components/loader";
 
 export default function User() {
   const { name, isAdmin } = useCurrentUser();
@@ -23,8 +24,13 @@ export default function User() {
 
   const navigate = useNavigate();
 
+  console.log(student);
+
   return (
     <>
+      {(student.isLoading === undefined ||
+        student.isLoading === true ||
+        contestant.isContestant === false) && <Loader />}
       <main className="profile-page ">
         <section className="relative block h-72">
           <div
@@ -67,7 +73,11 @@ export default function User() {
                     <div className="relative flex justify-center">
                       <img
                         alt="..."
-                        src={mine}
+                        src={`${
+                          contestant != null && contestant.isContestant
+                            ? contestant.image
+                            : mine
+                        }`}
                         className="shadow-xl rounded-full h-auto align-middle border-none -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>

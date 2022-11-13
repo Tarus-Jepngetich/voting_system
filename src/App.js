@@ -36,7 +36,6 @@ function App() {
   const { isAdmin } = useCurrentUser();
   const contestants = useAllContestants();
 
-
   // spliting of the Url to get the username
   let temp = path.split("/");
   let contestantId = temp[temp.length - 1];
@@ -172,7 +171,7 @@ function App() {
                       </div>
                     }
                   ></Route>
-                   <Route
+                  <Route
                     exact
                     path="/StudentForm"
                     element={
@@ -287,7 +286,7 @@ function App() {
                       </div>
                     }
                   ></Route>
-                   <Route
+                  <Route
                     exact
                     path="/StudentForm"
                     element={
