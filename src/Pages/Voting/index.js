@@ -1,6 +1,7 @@
 import VotingCard from "./votingCard";
 import { useAllContestants } from "../../hooks/useAllContestants";
 import { useCurrentStudent } from "../../hooks/useCurrentStudent";
+import Loader from "../../components/loader";
 
 export default function Voting() {
   const contestants = useAllContestants();
@@ -14,7 +15,9 @@ export default function Voting() {
   return (
     <>
       {(student.isLoading === undefined || student.isLoading === true) && (
-        <div></div>
+        <div className="flex place-content-center justify-center h-screen">
+          <Loader />
+        </div>
       )}
       {!student.isLoading && student.isStudent ? (
         <div className="text-center text-bold text-2xl m-2">
@@ -37,12 +40,15 @@ export default function Voting() {
           </div>
         </div>
       ) : (
+        contestants != null &&
         !student.isLoading &&
         !student.isStudent &&
         student.isLoading !== undefined && (
           <div className="grid place-items-center justify-center">
             <img src="https://www.gif-maniac.com/gifs/54/53631.gif" alt="" />
-            <span className="text-xl text-blue-900">You must be a student to vote</span>
+            <span className="text-xl text-blue-900">
+              You must be a student to vote
+            </span>
           </div>
         )
       )}
