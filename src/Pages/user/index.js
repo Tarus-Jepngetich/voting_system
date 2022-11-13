@@ -18,7 +18,7 @@ export default function User() {
   }, [student]);
 
   useEffect(() => {
-    setIsContestant(contestant.isContestant);
+    setIsContestant(contestant?.isContestant);
   }, [contestant]);
 
   const navigate = useNavigate();

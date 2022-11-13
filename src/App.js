@@ -118,7 +118,7 @@ function App() {
                   }}
                 >
                   <img
-                    className="p-1 w-sm:w-10 sm:h-10 rounded-full ring-2 ring-cyan-300 dark:ring-blue-500"
+                    className="p-1 w-sm:w-10 sm:h-10 h-5 rounded-full ring-2 ring-cyan-300 dark:ring-blue-500"
                     src={profile}
                     alt=""
                   />

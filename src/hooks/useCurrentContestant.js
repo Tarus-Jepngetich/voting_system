@@ -8,6 +8,8 @@ export const useCurrentContestant = (studentId) => {
   const [contestant, setContestant] = useState(null);
   const [contestants, setContestants] = useState(null);
   const [isContestant, setIsContestant] = useState(false);
+  const [flag, setFlag] = useState(false);
+
   const prefix = useUrlPrefix();
 
   const axios = authAxios(token, prefix);
@@ -21,9 +23,12 @@ export const useCurrentContestant = (studentId) => {
 
   useEffect(() => {
     if (contestants) {
-      const _contestant = contestants.filter(
-        (value) => value.student.id === studentId
-      );
+      const _contestant = contestants.filter((value) => {
+        if (value.student) {
+          setFlag(value.student.id === studentId);
+        }
+        return flag;
+      });
 
       if (_contestant.length > 0) {
         setIsContestant(true);

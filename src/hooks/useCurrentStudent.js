@@ -9,6 +9,7 @@ export const useCurrentStudent = () => {
   const [students, setStudents] = useState(null);
   const [isStudent, setIsStudent] = useState(false);
   const [isLoading, setIsLoading] = useState();
+  const [flag, setFlag] = useState(false);
 
   const prefix = useUrlPrefix();
   const axios = authAxios(token, prefix);
@@ -28,8 +29,13 @@ export const useCurrentStudent = () => {
   }, [token]);
 
   useEffect(() => {
-    if (students) {
-      const _student = students.filter((value) => value.user.id === id);
+    if (students !== null) {
+      const _student = students.filter((value) => {
+        if (value.user) {
+          setFlag(value.user.id === id);
+        }
+        return flag;
+      });
 
       if (_student.length > 0) {
         setIsStudent(true);
